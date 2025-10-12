@@ -73,6 +73,7 @@ In summary, the **control plane** implements the brains of Kubernetes.
 - Kubelet: It's the main Kubernetes agent and handles all communications with the cluster.
 
 > The kubelet perform the following tasks:
+>
 > - Watches the API server for new tasks.
 > - Executes the appropiate runtime to execute tasks.
 > - Reposts tasks status to the API server.
@@ -80,3 +81,28 @@ In summary, the **control plane** implements the brains of Kubernetes.
 - Runtime: Every worker node has one or more runtimes (like docker, containerd, etc...) for executing tasks.
 
 - Kube-proxy: Implements cluster networking and load balances traffic to tasks running on the node.
+
+### Packaging apps for Kubernetes
+
+Kubernetes runs a lot of things, but before it can run on Kubernetes, they first need to be wrapped in Pods.
+
+Pods are a thin wrapper that abstracts different types of tasks so they can run on Kubernetes.
+
+Pods are wrapped in higher-level controllers for advanced features like scaling, self-healing, rollouts, etc...
+
+We can think about it like:
+
+1. The Pod is the thin abstraction layer that allows Kubernetes to manage our containerized application.
+2. The Pod are wrapped into another abstractions to add capabilities to the Pod.
+
+Each layer of wrapping adds something.
+
+### The desired state
+
+It works on three principles:
+
+- Desired state: It's what you want.
+
+- Observed state: It's what you have.
+
+- Reconciliation: Is the process of keeping observed state in sync with desired state.
