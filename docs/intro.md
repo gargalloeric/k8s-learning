@@ -76,7 +76,7 @@ In summary, the **control plane** implements the brains of Kubernetes.
 >
 > - Watches the API server for new tasks.
 > - Executes the appropiate runtime to execute tasks.
-> - Reposts tasks status to the API server.
+> - Reports tasks status to the API server.
 
 - Runtime: Every worker node has one or more runtimes (like docker, containerd, etc...) for executing tasks.
 
