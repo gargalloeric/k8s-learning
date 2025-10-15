@@ -27,7 +27,7 @@ Each Pod it's a shared execution environment for one or more containers. This ex
 - Shared memory
 - More...
 
-So, if we have multiple containers in the same Pod (a multi-container Pod) this will be abaliable to the outside world through the same IP address. If the containers inside the Pod
+So, if we have multiple containers in the same Pod (a multi-container Pod) this will be avaliable to the outside world through the same IP address. If the containers inside the Pod
 need to communicate with each other, they can use the `localhost`interface.
 
 > [!NOTE]
@@ -44,7 +44,7 @@ Pods are created, live and die. Anytime a Pod dies, Kubernetes replaces it with 
 
 Pods are immutable. You never change them once they are running.
 
-If you need to update a Pod, you **always replace** it with a new one that carries the update.
+If you need to update a Pod, **you always replace it with a new one** that carries the update.
 
 > [!IMPORTANT]
 > When we talk about updating a Pod, we're ALWAYS referring to deleting the old one and starting a new one.
