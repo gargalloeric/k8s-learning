@@ -62,3 +62,46 @@ Pods are managed by Controllers that can replace the Pods thus changing the Pod 
 Clients cannot make reliable connections to individual Pods as Kubernetes doesn't guarantee they will exists.
 
 Services provide a reliable name and IP, and load balances requests to the Pods behind it.
+
+## Process of deploying a Pod
+
+1. Define the Pod in a YAML _mainfest file_.
+2. Post the _manifest_ to the API server.
+3. The request is authenticated and authorized.
+4. The Pod spec is validated.
+5. The scheduler filters nodes based on nodeSelectors, affinity and anti-affinity rules, topology spread constraints, resource requirements and limits, and more.
+6. The Pod is assigned to a healthy node meeting all the requirements.
+7. The kubelet on the node watches the API server and notices the Pod assignment.
+8. The kubelet downloads the Pod spec and asks the local runtime to start it.
+9. The kubelet monitors the Pod status and reports status changes to the API server.
+
+> [!NOTE]
+> Deploying a Pod is an **atomic operation**. This means a Pod only starts servicing requests when all its containers are running.
+
+> [!NOTE]
+> To see the documentation of the Pod spec you can use the command:
+> `kubectl explain pod --recursive | more`
+> Or if you want an explanation of a specific property (like it's posible values etc...) you can use the command:
+> `kubectl explain pod.spec.<property>`
+
+There are two ways to deploy Pods:
+
+- Directly via a Pod manifest (rare).
+- Indirectly via a workload resource and controller (most common).
+
+Directly via Pod manifest means that we are deploying the Pod directly on the node, this means that the Pod it's managed only by the kubelet that has a limited set of actions
+like starting the containers and stoping them. If the node fails, the kubelet fails with it and cannot do anything to help the Pod.
+
+On the other hand, Pods deployed using workload resources, get all the benefits of being managed by a highly available controller that can restart them on other nodes, scale them
+and perform advanced operations.
+
+## The Pod network
+
+Every cluster runs a _pod network_, all Pods are connected to it automatically. The network spans every cluster node and allows every Pod to talk every othe Pod even if the Pods are
+running in different nodes of the cluster.
+
+> [!NOTE]
+> The Pod network is implemented as a _third party plugin_, you choose a network plugin at cluster build and it configures the Pod network for the entire cluster.
+
+> [!IMPORTANT]
+> Newly created clusters implement a very lax network security policy for simplicity. **You should use Kubernetes Network Policies and other measures to secure it.**
