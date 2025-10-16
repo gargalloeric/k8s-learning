@@ -27,7 +27,7 @@ Each Pod it's a shared execution environment for one or more containers. This ex
 - Shared memory
 - More...
 
-So, if we have multiple containers in the same Pod (a multi-container Pod) this will be avaliable to the outside world through the same IP address. If the containers inside the Pod
+So, if we have multiple containers in the same Pod (a multi-container Pod) this will be abaliable to the outside world through the same IP address. If the containers inside the Pod
 need to communicate with each other, they can use the `localhost`interface.
 
 > [!NOTE]
@@ -44,7 +44,7 @@ Pods are created, live and die. Anytime a Pod dies, Kubernetes replaces it with 
 
 Pods are immutable. You never change them once they are running.
 
-If you need to update a Pod, **you always replace it with a new one** that carries the update.
+If you need to update a Pod, you **always replace** it with a new one that carries the update.
 
 > [!IMPORTANT]
 > When we talk about updating a Pod, we're ALWAYS referring to deleting the old one and starting a new one.
@@ -105,3 +105,15 @@ running in different nodes of the cluster.
 
 > [!IMPORTANT]
 > Newly created clusters implement a very lax network security policy for simplicity. **You should use Kubernetes Network Policies and other measures to secure it.**
+
+## Multi-container Pods Init Containers vs Sidecars
+
+**Init containers**: It runs in the same Pod as the main app, but Kubernetes guarantees that this container will start and finish before the main application container. It will
+be run only once. The purpose of init container is to prepare and initialize the environment for the main application container.
+
+> [!INFO]
+> If multiple init containers, Kubernetes runs them in the same order as they appear in the manifest. And starts the main application container once all init containers have finished.
+
+**Sidecars containers**: It runs alongiside the main application container, it's job is to provide additional functionality without having to add it to the main application.
+
+You define sidecars as init containers with the `restartPolicy`set to `Always`.
