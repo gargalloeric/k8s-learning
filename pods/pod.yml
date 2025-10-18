@@ -23,7 +23,7 @@ spec:
       - containerPort: 8080
       # In the resources section we can defined two types of limits
       # 1. Requests which are minimum values
-      # 2. Limts which are maximum values
+      # 2. Limits which are maximum values
       resources:
         limits:
           memory: 128Mi
