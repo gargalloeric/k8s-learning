@@ -1,0 +1,31 @@
+# Tells Kubernetes what version of the API has to use in orther to create the object.
+apiVersion: v1
+
+# Tells Kubernetes what type of object you are creating.
+kind: Pod
+
+metadata:
+  # Gives the pod a name
+  name: hello-pod
+
+  # Labels are used to connect the Pod to services like networking.
+  labels:
+    zone: prod
+    version: v1
+
+# Spec is where most of the action happens, it's where we define the Pod containers
+# and configure the containers like the listening port, and resources needed for the Pod.
+spec:
+  containers:
+    - name: hello-ctr
+      image: nigelpoulton/k8sbook:1.0
+      ports:
+      - containerPort: 8080
+      # In the resources section we can defined two types of limits
+      # 1. Requests which are minimum values
+      # 2. Limts which are maximum values
+      resources:
+        limits:
+          memory: 128Mi
+          cpu: 0.5
+        
