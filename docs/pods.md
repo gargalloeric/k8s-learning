@@ -13,6 +13,7 @@ use cases for multi-container Pods.
 - Apps with tightly coupled helper functions such as log scrapers.
 
 > [!NOTE]
+>
 > Often you will hear the term _sidecar_ which is a fancy word for referring to a helper container that runs in the same Pod as the main app container and provides
 > additional services.
 
@@ -31,6 +32,7 @@ So, if we have multiple containers in the same Pod (a multi-container Pod) this 
 need to communicate with each other, they can use the `localhost`interface.
 
 > [!NOTE]
+>
 > You should use multi-container Pods when your application has thightly coupled components needeing to share resources such as memory and storage.
 
 ## Lifecycle
@@ -38,6 +40,7 @@ need to communicate with each other, they can use the `localhost`interface.
 Pods are created, live and die. Anytime a Pod dies, Kubernetes replaces it with a new one.
 
 > [!NOTE]
+>
 > Although the new created Pod it's identically to the old one, it has a new ID and a new IP.
 
 ## Immutability
@@ -47,6 +50,7 @@ Pods are immutable. You never change them once they are running.
 If you need to update a Pod, you **always replace** it with a new one that carries the update.
 
 > [!IMPORTANT]
+>
 > When we talk about updating a Pod, we're ALWAYS referring to deleting the old one and starting a new one.
 
 ## Deployments
@@ -76,9 +80,11 @@ Services provide a reliable name and IP, and load balances requests to the Pods 
 9. The kubelet monitors the Pod status and reports status changes to the API server.
 
 > [!NOTE]
+>
 > Deploying a Pod is an **atomic operation**. This means a Pod only starts servicing requests when all its containers are running.
 
 > [!NOTE]
+>
 > To see the documentation of the Pod spec you can use the command:
 > `kubectl explain pod --recursive | more`
 > Or if you want an explanation of a specific property (like it's posible values etc...) you can use the command:
@@ -101,9 +107,11 @@ Every cluster runs a _pod network_, all Pods are connected to it automatically. 
 running in different nodes of the cluster.
 
 > [!NOTE]
+>
 > The Pod network is implemented as a _third party plugin_, you choose a network plugin at cluster build and it configures the Pod network for the entire cluster.
 
 > [!IMPORTANT]
+>
 > Newly created clusters implement a very lax network security policy for simplicity. **You should use Kubernetes Network Policies and other measures to secure it.**
 
 ## Multi-container Pods Init Containers vs Sidecars
@@ -112,6 +120,7 @@ running in different nodes of the cluster.
 be run only once. The purpose of init container is to prepare and initialize the environment for the main application container.
 
 > [!INFO]
+>
 > If multiple init containers, Kubernetes runs them in the same order as they appear in the manifest. And starts the main application container once all init containers have finished.
 
 **Sidecars containers**: It runs alongiside the main application container, it's job is to provide additional functionality without having to add it to the main application.

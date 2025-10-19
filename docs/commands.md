@@ -72,3 +72,44 @@ behaviour can be overwritten by using the flag `--container <container-name>`.
 >
 > You can obtain the order of the containers in the Pod and their names using the describe command.
 
+## Get Services
+
+```bash
+kubectl get services
+```
+
+## Get a specific service
+
+You would run the get services command to list all services and then:
+
+```bash
+kubectl get service <service>
+```
+
+## Delete Pods
+
+In order to delete pods you have two options:
+
+1. Use the following command:
+
+```bash
+kubectl delete pod <pods>
+
+# Example: kubectl delete pod pod1 pod2 pod3 ...
+```
+
+2. Use the manifest to delete all the objects (Pods, Services, etc...) explicitly defined on the manifest:
+
+```bash
+kubectl delete -f manifest.yml
+
+# Example: kubectl delete -f manifest1.yml -f manifest2.yml -f manifest3.yml ...
+```
+
+## Delete Services
+
+```bash
+kubectl delete service <services>
+
+# Example: kubectl delete service service1 service2 service3 ...
+```
