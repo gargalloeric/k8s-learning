@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: initpod
+  labels:
+    app: initializer
+spec:
+  # Containers defined under initContainers block, makes them init containers
+  # that Kubernetes guarantees will run and complete before it starts regular containers
+  initContainers:
+  - name: init-ctr
+    image: busybox:1.28.4
+    command: ['sh', '-c', 'until nslookup k8sbook; do echo waiting for k8sbook service; sleep 1; done; echo Service found!']
+
+  # Containers defined under the containers block are regular containers and will be executed after all the init containers are successfully finished.
+  containers:
+    - name: web-ctr
+      image: nigelpoulton/web-app:1.0
+      ports:
+        - containerPort: 8080

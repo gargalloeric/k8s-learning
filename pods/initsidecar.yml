@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: git-sync
+  labels:
+    app: sidecar
+spec:
+  initContainers:
+  - name: ctr-sync
+
+    # This option it's what transforms this init container into a sidecar that will run alongside the app container. It will
+    # start before the app container and end after the app container is terminated.
+    restartPolicy: Always
+    image: k8s.gcr.io/git-sync:v3.1.6
+    volumeMounts:
+    - name: html
+      mountPath: /tmp/git
+    env:
+    - name: GIT_SYNC_REPO
+      value: https://github.com/gargalloeric/ps-sidecar.git
+    - name: GIT_SYNC_BRANCH
+      value: master
+    - name: GIT_SYNC_DEPTH
+      value: "1"
+    - name: GIT_SYNC_DEST
+      value: "html"
+  containers:
+    - name: ctr-web
+      image: nginx
+      volumeMounts:
+      - name: html
+        mountPath: /usr/share/nginx/
+  volumes:
+    - name: html
+      emptyDir: {}
+
+
+---
+# You can define Services in the same yaml file as the Pod, use --- to separate the two objects.
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-sidecar
+spec:
+  selector:
+    app: sidecar
+  ports:
+    - port: 80
+  type: LoadBalancer
