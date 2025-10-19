@@ -9,6 +9,7 @@ kubectl apply -f file.yml
 ```
 
 > [!NOTE]
+>
 > It also authenticates the request using the credentials defined in the _kubeconfig_ file.
 
 ## Get Pods
@@ -21,8 +22,10 @@ This command has some useful options like:
 
 1. **-o wide** gives a few more columns to the output, like the node where the Pod is being executed.
 2. **-o yaml** give you everything Kubernetes knows about the object.
+3. **--watch** to get updates in real time of the pods.
 
 > [!NOTE]
+>
 > The output of __-o yaml__ has two main sections, spec and status. One shows the desire state and the second one the observed state.
 
 ## Describe Pods
@@ -43,6 +46,7 @@ In a multi-container Pod, this command will show the logs from the first contain
 behaviour can be overwritten by using the flag `--container <container-name>`.
 
 > [!NOTE]
+>
 > You can obtain the order of the containers in the Pod and their names using the describe command.
 
 ## Executing commands in Pods
@@ -65,5 +69,6 @@ In a multi-container Pod, this command will show the logs from the first contain
 behaviour can be overwritten by using the flag `--container <container-name>`.
 
 > [!NOTE]
+>
 > You can obtain the order of the containers in the Pod and their names using the describe command.
 
