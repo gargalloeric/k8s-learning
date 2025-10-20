@@ -119,7 +119,7 @@ running in different nodes of the cluster.
 **Init containers**: It runs in the same Pod as the main app, but Kubernetes guarantees that this container will start and finish before the main application container. It will
 be run only once. The purpose of init container is to prepare and initialize the environment for the main application container.
 
-> [!INFO]
+> [!NOTE]
 >
 > If multiple init containers, Kubernetes runs them in the same order as they appear in the manifest. And starts the main application container once all init containers have finished.
 
