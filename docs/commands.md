@@ -113,3 +113,40 @@ kubectl delete service <services>
 
 # Example: kubectl delete service service1 service2 service3 ...
 ```
+
+## Get namespaces
+
+```bash
+kubectl get namespaces
+```
+
+## Crete a namespace
+
+Using the imperative way (CLI):
+
+```bash
+kubectl create namespace <name>
+```
+
+Using the declarative way:
+
+```bash
+kubectl apply -f <manifest>
+```
+
+## Delte a namespace
+
+```bash
+kubectl delete namespace <name>
+```
+
+> [!NOTE]
+>
+> Deleting a namespace will also remove all the Pods, Services and other objects
+> associated to it.
+
+## Configure kubectl to run all commands agains a specific namespace
+
+```bash
+kubectl config set-context --current --namespace <name>
+```
