@@ -2,7 +2,7 @@
 
 Namespaces are a way to divide a Kubernetes cluster into multiple virtual clusters.
 
-Namespaces are a form of _soft isolation_ and enable soft _multi-tenacy_. For example you can create namspaces for different environments like **dev**, **test**, **prod**, etc...
+Namespaces are a form of _soft isolation_ and enable soft _multi-tenancy_. For example you can create namspaces for different environments like **dev**, **test**, **prod**, etc...
 and apply different configurations to each.
 
 > [!CAUTION]
