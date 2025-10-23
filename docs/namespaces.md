@@ -38,7 +38,7 @@ permissions, resources quotas, permissions, etc...
 
 > [!IMPORTANT]
 >
-> If you want hard multi-tenancy and isolation, you should implement different clusters on different hardware. So compromised workloads in on cluster doesn't affect the other.
+> If you want hard multi-tenancy and isolation, you should implement different clusters on different hardware. So compromised workloads in one cluster doesn't affect the other.
 
 ## Kubernetes default namespaces
 
