@@ -1,0 +1,49 @@
+# Tells Kubernetes to create a Deployment object based on the version of
+# the Deployment resource defined in the apps/v1 API.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deploy
+spec:
+  # Defines the Deployment rollout and rollback strategy.
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # Never have more that one Pod below desired state. This means that if the desired state is
+      # 10 replicas, Kubernetes can go down to 9 replicas during the rollout.
+      maxUnavailable: 1
+      # Never have more than one Pod above desired state. This means that if the desired state is
+      # 10 replicas, Kubernetes can go up to 11 replicas during the rollout.
+      maxSurge: 1
+      # The net result is a rollout that updates two Pods at a time (the delta between 9 and 11 is 2).
+
+  # Defines the ReplicaSet for scaling and self-healing.
+  replicas: 10
+  selector:
+    matchLabels:
+      app: hello-world
+  # Tells Kubernetes to keep the previous 5 ReplicaSets so you can rollback to the last five versions.
+  revisionHistoryLimit: 5
+  # Tells Kubernetes to give each new Pod replica a five-minute window to start properly before
+  # assuming it’s failed. 
+  progressDeadlineSeconds: 300
+  # Throttles the rate at which Kubernetes replaces replicas. This configuration tells Kubernetes to wait
+  # 10 seconds between each replica.
+  minReadySeconds: 10
+
+  # Defines the Pods that the Deployment has to manage.
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-pod
+        image: nigelpoulton/k8sbook:1.0 # Replace from v1 to v2 to see rolling updates.
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 0.1 
+  

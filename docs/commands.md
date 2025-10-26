@@ -150,3 +150,81 @@ kubectl delete namespace <name>
 ```bash
 kubectl config set-context --current --namespace <name>
 ```
+
+## Get deployments
+
+```bash
+kubectl get deploy
+```
+
+To get a specific deployment, we can run:
+
+```bash
+kubectl get deploy <name>
+```
+
+## Describe deployments
+
+```bash
+kubectl describe deployment <name>
+```
+
+## Get replicaset
+
+```bash
+kubectl get replicaset
+
+# Or kubectl get rs
+```
+
+## Describe a replicaset
+
+```bash
+kubectl describe replicaset <name>-hash
+```
+
+## Scale a deployment
+
+```bash
+kubectl scale deploy <name> --replicas <number>
+```
+
+> [!IMPORTANT]
+>
+> Prefer always to use the declarative approach instead of the imperative meaning, all changes should
+> be made through posting updated versions of the yaml manifest to the Kubernetes cluster.
+
+## Monitoring rollout process
+
+```bash
+kubectl rollout status deployment <name>
+```
+
+## Pausing a rollout
+
+```bash
+kubectl rollout pause deployment <name>
+```
+
+## Resuming a rollout
+
+```bash
+kubectl rollout resume deployment <name>
+```
+
+## Check rollout history
+
+```bash
+kubectl rollout history deployment <name>
+```
+
+## Rollback to a previous version
+
+```bash
+kubectl rollout undo deployment <name> --to-revision=<revisionNumber>
+```
+
+> [!IMPORTANT]
+>
+> This is an imperative command and it's not recommended. However, it's convinient for quick rollbacks,
+> just remember to update the manifest file to reflect the changes.
