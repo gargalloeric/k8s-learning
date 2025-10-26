@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-lb
+spec:
+  type: LoadBalancer
+  ports:
+    # Load balancer port.
+  - port: 9000
+    # Application port inside the container.
+    targetPort: 8080
+  selector:
+    chapter: services

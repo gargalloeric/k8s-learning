@@ -228,3 +228,15 @@ kubectl rollout undo deployment <name> --to-revision=<revisionNumber>
 >
 > This is an imperative command and it's not recommended. However, it's convinient for quick rollbacks,
 > just remember to update the manifest file to reflect the changes.
+
+## Create a service
+
+```bash
+kubectl expose deployment <name> --type=LoadBalancer
+```
+> [!NOTE]
+>
+> It’s intelligent enough to inspect the
+> running Deployment and create all the required constructs,
+> such as IP address, label selector, DNS records, and correct port
+> mappings.
