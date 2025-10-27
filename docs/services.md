@@ -21,7 +21,7 @@ Kubernetes has several types of Services for different use cases and requirement
 
 ### ClusterIP
 
-It's the default Service type. These get a DNS name and IP address that programmed into the internal network and are **only accesible from inside the cluster**.
+It's the default Service type. These get a DNS name and IP address that are programmed into the internal network and are **only accesible from inside the cluster**.
 
 - The IP is only routable on the internal Pod network.
 - The name is automatically registered with the cluster's internal DNS.
