@@ -240,3 +240,27 @@ kubectl expose deployment <name> --type=LoadBalancer
 > running Deployment and create all the required constructs,
 > such as IP address, label selector, DNS records, and correct port
 > mappings.
+
+## List ingress classes
+
+```bash
+kubectl get ingressclass
+```
+
+## Describe ingress classes
+
+```bash
+kubectl describe ingressclass <name>
+```
+
+## List ingress objects
+
+```bash
+kubectl get ingress
+```
+
+## Describe an ingress
+
+```bash
+kubectl describe ingress <name>
+```

@@ -1,0 +1,52 @@
+# Use the subgroup API to create the Ingress object.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mcu-all
+  # Tells the controller to make a best effort attempt to rewrite paths to the path the app expects.
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: / # Specific to the NGINX Ingress controller.
+spec:
+  # Tells Kubernetes that this Ingress object needs to be managed by the NGINX Ingress controller that has been previously installed.
+  ingressClassName: nginx
+  rules:
+    # Defines a host based rule for traffic arriving on shield.mcu.com
+  - host: shield.mcu.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-shield
+            port:
+              number: 8080
+    # Defines a host based rule for traffic arriving on hydra.mcu.com
+  - host: hydra.mcu.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-hydra
+            port:
+              number: 8080
+    # Defines a path based rule for traffic arriving to mcu.com/shield and mcu.com/hydra
+  - host: mcu.com
+    http:
+      paths:
+      - path: /shield
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-shield
+            port:
+              number: 8080
+      - path: /hydra
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-hydra
+            port:
+              number: 8080
