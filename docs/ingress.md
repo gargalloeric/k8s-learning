@@ -28,3 +28,11 @@ Ingress classes allows you to run multiple Ingress controllers on a single clust
 > [!NOTE]
 > 
 > You install an Ingress controller, then you create Ingress objects which are list of rules governing how incomming traffic is routed to applications on the cluster.
+
+## Main Difference with a Service (Type LoadBalancer)
+
+A Kubernetes Service of type LoadBalancer provisions an external cloud load balancer with its own external IP address. This load balancer forwards incoming traffic directly to the Pods backing that Service. Each LoadBalancer service results in a separate cloud load balancer resource being allocated (which may incur additional costs). It is suitable for exposing a single service externally with a dedicated IP.
+
+An Ingress, on the other hand, is a higher-level Kubernetes resource that manages external HTTP/HTTPS access to multiple Services in a cluster. Instead of provisioning multiple cloud load balancers, typically only one external load balancer is provisioned for the Ingress Controller (itself usually exposed via a LoadBalancer service or NodePort). The Ingress Controller listens to Ingress resource rules and routes incoming requests based on hostnames, paths, or other rules to the internal cluster IP Services, which then route traffic to the Pods.
+
+In summary, Services of type LoadBalancer expose individual services with dedicated cloud load balancers, while Ingress provides a single entry point with routing rules to direct traffic to multiple services inside the cluster. This makes Ingress more cost-effective and flexible for HTTP/HTTPS traffic routing.
