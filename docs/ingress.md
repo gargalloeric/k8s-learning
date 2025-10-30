@@ -5,7 +5,7 @@ Ingress is all about accessing multiple web applications through a single LoadBa
 LoadBalancer Services only provide a one-to-one mapping between internal Services and cloud load balancers. This means a cluster with 25 internet facing apps will need
 25 cloud load balanacers. Ingress fixes this by letting you expose multiple Services through a single cloud load balancer.
 
-Ingress it's defined in the networking.k8s.io/v1 API sub-group.
+Ingress it's defined in the `networking.k8s.io/v1` API sub-group.
 
 > [!IMPORTANT]
 >
